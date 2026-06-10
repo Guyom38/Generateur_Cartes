@@ -560,7 +560,7 @@ ni envoyer de messages.</textarea>
 <!-- ═══════════════════════════════ APERÇU ═══════════════════════════════ -->
 <div id="card-preview-container" class="flex-1 h-screen overflow-y-auto flex items-start justify-center p-8">
   <div id="cards-row">
-    <div id="the-card" class="rounded-[3.5rem] flex flex-col card-font relative overflow-hidden">
+    <div id="the-card" class="rounded-[3.5rem] flex flex-col card-font relative">
         <div id="card-inner-border" class="w-full h-full rounded-[2.5rem] flex flex-col relative p-6 border-[20px]">
 
             <div id="card-header-wrapper" class="relative flex items-center w-full min-h-[135px]">
@@ -675,14 +675,14 @@ let _layoutChanging = false;
 
 function applyLayoutPercents() {
     [
-        [cardHeaderWrapper, layoutState.header, 'visible'],
-        [cardImgWrapper,    layoutState.image,  'hidden'],
-        [cardDesc,          layoutState.desc,   'visible'],
-        [cardFooterWrapper, layoutState.footer, 'hidden']
-    ].forEach(([el, pct, ov]) => {
+        [cardHeaderWrapper, layoutState.header],
+        [cardImgWrapper,    layoutState.image],
+        [cardDesc,          layoutState.desc],
+        [cardFooterWrapper, layoutState.footer]
+    ].forEach(([el, pct]) => {
         el.style.flex      = `${pct} 0 0`;
         el.style.minHeight = '0';
-        el.style.overflow  = ov;
+        el.style.overflow  = 'visible';
     });
 }
 
@@ -1241,8 +1241,8 @@ function applyStateToCard(root, s) {
 
     // Répartition verticale
     const lp = s.layoutPercents || { header:12, image:50, desc:33, footer:5 };
-    [[hdr,lp.header,'visible'],[imgW,lp.image,'hidden'],[desc,lp.desc,'visible'],[footer,lp.footer,'hidden']]
-        .forEach(([el, pct, ov]) => { if (el) { el.style.flex = `${pct} 0 0`; el.style.minHeight = '0'; el.style.overflow = ov; } });
+    [[hdr,lp.header],[imgW,lp.image],[desc,lp.desc],[footer,lp.footer]]
+        .forEach(([el, pct]) => { if (el) { el.style.flex = `${pct} 0 0`; el.style.minHeight = '0'; el.style.overflow = 'visible'; } });
 
     // Marges entre blocs
     const gv = s.gapValues || { gap1:0, gap2:0, gap3:0 };
