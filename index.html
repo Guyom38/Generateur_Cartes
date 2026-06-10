@@ -165,6 +165,17 @@
                     <span class="font-bold text-sm text-slate-800">Apparence</span>
                 </div>
                 <div class="mb-3">
+                    <div class="field-label"><label>Type de carte</label></div>
+                    <div id="type-dropdown" class="relative">
+                        <button id="type-dropdown-btn" type="button" class="w-full flex items-center gap-2 p-2 border border-gray-200 rounded-lg text-sm bg-white hover:border-blue-400 transition-colors">
+                            <img id="type-current-icon" src="" alt="" class="w-5 h-5 object-contain" style="display:none;">
+                            <span id="type-current-text" class="flex-1 text-left font-semibold text-slate-700">Personnalisé</span>
+                            <span class="text-gray-400 text-xs">▾</span>
+                        </button>
+                        <div id="type-dropdown-menu" class="hidden absolute z-30 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
                     <div class="field-label">
                         <label>Couleur principale</label>
                         <button class="reset-btn" data-reset="mainColor" title="Défaut">↺</button>
@@ -814,6 +825,7 @@ function updateCard() {
     updateSliderDisplays();
     applyLayoutPercents();
     applyGaps();
+    if (typeof refreshTypeDisplay === 'function') refreshTypeDisplay();
     autoSave();
 }
 
@@ -996,6 +1008,9 @@ async function exportCard(format) {
             scale: 1, useCORS: true, logging: false,
             width: 1055, height: 1491,
             onclone: (doc) => {
+                // Neutraliser le scale du conteneur (sinon la carte est capturée réduite)
+                const row = doc.getElementById('cards-row');
+                if (row) { row.style.transform = 'none'; row.style.margin = '0'; }
                 const el = doc.getElementById('the-card');
                 if (el) {
                     el.style.transform     = 'none';
@@ -1494,9 +1509,78 @@ function applyGaps() {
 });
 
 // ════════════════════════════════════════════════════════════
+//  TYPES DE CARTE (liste déroulante depuis config_types.json)
+// ════════════════════════════════════════════════════════════
+const DEFAULT_TYPES = [
+    { icon: 'icone_exclamation.png', color: '#A93226', text: 'VRAIMENT BLOQUANT' },
+    { icon: 'icone_inter.png',       color: '#2471A3', text: 'BON À SAVOIR' },
+    { icon: 'icone_ok.png',          color: '#1E8449', text: 'BON PRATIQUE' }
+];
+let cardTypes = DEFAULT_TYPES.slice();
+
+const typeDropdown = $('type-dropdown');
+const typeBtn      = $('type-dropdown-btn');
+const typeMenu     = $('type-dropdown-menu');
+const typeCurIcon  = $('type-current-icon');
+const typeCurText  = $('type-current-text');
+
+function buildTypeMenu() {
+    typeMenu.innerHTML = '';
+    cardTypes.forEach((t, i) => {
+        const opt = document.createElement('button');
+        opt.type = 'button';
+        opt.className = 'w-full flex items-center gap-2 p-2 text-sm text-left hover:bg-blue-50 transition-colors';
+        opt.innerHTML = `<img src="${t.icon}" class="w-5 h-5 object-contain" alt=""><span class="font-semibold text-slate-700">${t.text}</span>`;
+        opt.addEventListener('click', () => { applyType(i); typeMenu.classList.add('hidden'); });
+        typeMenu.appendChild(opt);
+    });
+}
+
+function setTypeDisplay(t) {
+    if (t) {
+        typeCurIcon.src = t.icon;
+        typeCurIcon.style.display = '';
+        typeCurText.textContent = t.text;
+    } else {
+        typeCurIcon.style.display = 'none';
+        typeCurText.textContent = 'Personnalisé';
+    }
+}
+
+// Synchronise l'affichage du bouton selon la couleur + texte du footer courants
+function refreshTypeDisplay() {
+    const t = cardTypes.find(t =>
+        t.color.toLowerCase() === mainColorInput.value.toLowerCase() &&
+        t.text === indTextInput.value);
+    setTypeDisplay(t || null);
+}
+
+async function applyType(index) {
+    const t = cardTypes[index];
+    if (!t) return;
+    mainColorInput.value = t.color;
+    indTextInput.value   = t.text;
+    cardIcon.dataset.src = await toDataURL(t.icon);
+    updateCard();
+}
+
+async function loadTypeConfig() {
+    try {
+        const cfg = await fetch('config_types.json').then(r => r.json());
+        if (cfg && Array.isArray(cfg.types) && cfg.types.length) cardTypes = cfg.types;
+    } catch(_) { /* repli sur DEFAULT_TYPES (mode file://) */ }
+    buildTypeMenu();
+    refreshTypeDisplay();
+}
+
+typeBtn.addEventListener('click', e => { e.stopPropagation(); typeMenu.classList.toggle('hidden'); });
+document.addEventListener('click', e => { if (!typeDropdown.contains(e.target)) typeMenu.classList.add('hidden'); });
+
+// ════════════════════════════════════════════════════════════
 //  INIT
 // ════════════════════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded', () => {
+    loadTypeConfig();
     // Restaurer UI settings (échelle, fond)
     try {
         const ui = JSON.parse(localStorage.getItem('carte_ui') || '{}');
