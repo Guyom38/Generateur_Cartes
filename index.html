@@ -62,8 +62,13 @@
         input[type="range"] { accent-color: #1e293b; }
 
         .section-card { background: #fff; border-radius: 12px; padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06); border: 1px solid #f1f5f9; margin-bottom: 12px; }
-        .section-title { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; }
+        .section-title { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; cursor: pointer; user-select: none; }
         .section-bar { width: 3px; height: 16px; border-radius: 2px; flex-shrink: 0; }
+        .section-chevron { margin-left: auto; flex-shrink: 0; color: #94a3b8; font-size: 12px; transition: transform .2s ease; }
+        .section-card.collapsed .section-title { margin-bottom: 0; }
+        .section-card.collapsed .section-chevron { transform: rotate(-90deg); }
+        .section-card.collapsed > *:not(.section-title):not(.keep-collapsed) { display: none; }
+        .section-card.collapsed > .keep-collapsed { margin-top: 12px; margin-bottom: 0; }
 
         .field-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
         .field-label label { font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: .04em; }
@@ -91,8 +96,8 @@
         .mini-card { border-radius:8px; border:2px solid #e2e8f0; overflow:hidden; cursor:pointer; background:#fff; transition:border-color .15s, box-shadow .15s; }
         .mini-card:hover { border-color:#3b82f6; box-shadow:0 2px 6px rgba(59,130,246,.25); }
         .mini-card.selected { border-color:#10b981; }
-        .mini-thumb { background:#f8fafc; overflow:hidden; position:relative; }
-        .mini-thumb img { max-height:100%; max-width:100%; object-fit:contain; }
+        .mini-thumb { background:#f8fafc; overflow:hidden; position:relative; display:flex; align-items:center; justify-content:center; }
+        .mini-thumb > img { max-height:100%; max-width:100%; object-fit:contain; }
         .mini-name { font-size:9px; font-weight:600; color:#374151; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
         /* Paramètres */
@@ -294,7 +299,7 @@
                     </div>
                 </div>
                 <hr class="mb-3 border-slate-100">
-                <div class="mb-3">
+                <div class="mb-3 keep-collapsed">
                     <div class="field-label">
                         <label>Titre</label>
                         <button class="reset-btn" data-reset="titleText" title="Défaut">↺</button>
@@ -334,7 +339,7 @@
                     <div class="section-bar bg-purple-500"></div>
                     <span class="font-bold text-sm text-slate-800">Image centrale</span>
                 </div>
-                <div id="drop-zone" class="drop-zone bg-slate-50 p-4 rounded-xl text-center cursor-pointer hover:bg-blue-50 mb-3 transition-colors">
+                <div id="drop-zone" class="drop-zone keep-collapsed bg-slate-50 p-4 rounded-xl text-center cursor-pointer hover:bg-blue-50 mb-3 transition-colors">
                     <svg class="mx-auto h-7 w-7 text-gray-400 mb-1" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                         <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -372,7 +377,7 @@
                     <div class="section-bar bg-green-500"></div>
                     <span class="font-bold text-sm text-slate-800">Texte descriptif</span>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 keep-collapsed">
                     <div class="field-label">
                         <label>Contenu</label>
                         <button class="reset-btn" data-reset="descText" title="Défaut">↺</button>
@@ -413,7 +418,7 @@ ni envoyer de messages.</textarea>
                     <div class="section-bar bg-red-500"></div>
                     <span class="font-bold text-sm text-slate-800">Indicateur (pied de carte)</span>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 keep-collapsed">
                     <div class="field-label">
                         <label>Texte</label>
                         <button class="reset-btn" data-reset="indText" title="Défaut">↺</button>
@@ -1263,11 +1268,24 @@ function renderMiniCard(name, state, onLoad) {
     thumb.style.width  = THUMB_W + 'px';
     thumb.style.height = Math.round(1491 * scale) + 'px';
 
-    const clone = theCard.cloneNode(true);
-    applyStateToCard(clone, state);
-    clone.style.transformOrigin = 'top left';
-    clone.style.transform = `scale(${scale})`;
-    thumb.appendChild(clone);
+    try {
+        const clone = theCard.cloneNode(true);
+        applyStateToCard(clone, state);
+        clone.style.transformOrigin = 'top left';
+        clone.style.transform = `scale(${scale})`;
+        thumb.appendChild(clone);
+    } catch (err) {
+        console.error('renderMiniCard:', name, err);
+        // Repli : vignette simple (image centrale)
+        if (state && state.imgSrc) {
+            const img = document.createElement('img');
+            img.src = state.imgSrc;
+            img.onerror = () => { thumb.innerHTML = '<span style="font-size:20px">🃏</span>'; };
+            thumb.appendChild(img);
+        } else {
+            thumb.innerHTML = '<span style="font-size:20px">🃏</span>';
+        }
+    }
 
     const nameEl = document.createElement('div');
     nameEl.className = 'mini-name';
@@ -1507,6 +1525,41 @@ function applyGaps() {
         $(`lock-${key}-icon`).textContent = lock.checked ? '🔒' : '🔓';
     });
 });
+
+// ════════════════════════════════════════════════════════════
+//  SECTIONS REPLIABLES
+// ════════════════════════════════════════════════════════════
+(() => {
+    // On mémorise les sections DÉPLIÉES (par défaut : tout replié)
+    let expanded = null;
+    try {
+        const raw = localStorage.getItem('carte_expanded');
+        if (raw) expanded = new Set(JSON.parse(raw));
+    } catch(_){}
+    const save = () => { try { localStorage.setItem('carte_expanded', JSON.stringify([...expanded])); } catch(_){} };
+
+    if (!expanded) expanded = new Set();          // première visite : tout replié
+
+    document.querySelectorAll('.section-card').forEach(card => {
+        const title = card.querySelector('.section-title');
+        if (!title) return;
+        const label = title.querySelector('span')?.textContent.trim() || '';
+
+        const chev = document.createElement('span');
+        chev.className = 'section-chevron';
+        chev.textContent = '▾';
+        title.appendChild(chev);
+
+        if (!expanded.has(label)) card.classList.add('collapsed');
+
+        title.addEventListener('click', () => {
+            card.classList.toggle('collapsed');
+            if (card.classList.contains('collapsed')) expanded.delete(label);
+            else expanded.add(label);
+            save();
+        });
+    });
+})();
 
 // ════════════════════════════════════════════════════════════
 //  TYPES DE CARTE (liste déroulante depuis config_types.json)
