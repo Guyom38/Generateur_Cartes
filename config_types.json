@@ -1,7 +1,7 @@
 {
   "types": [
-    { "icon": "icone_exclamation.png", "color": "#A93226", "text": "VRAIMENT BLOQUANT" },
-    { "icon": "icone_inter.png",       "color": "#2471A3", "text": "BON À SAVOIR" },
-    { "icon": "icone_ok.png",          "color": "#1E8449", "text": "BON PRATIQUE" }
+    { "icon": "icones/icone_exclamation.png", "color": "#A93226", "text": "VRAIMENT BLOQUANT" },
+    { "icon": "icones/icone_inter.png",       "color": "#2471A3", "text": "BON À SAVOIR" },
+    { "icon": "icones/icone_ok.png",          "color": "#1E8449", "text": "BON PRATIQUE" }
   ]
 }

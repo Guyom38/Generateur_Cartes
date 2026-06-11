@@ -124,18 +124,24 @@
         </div>
 
         <!-- Actions -->
-        <div class="px-3 pb-2 grid grid-cols-3 gap-1.5">
+        <div class="px-3 pb-2 grid grid-cols-2 gap-1.5">
             <button id="btn-nouveau"    class="action-btn bg-slate-600 text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                Nouveau
-            </button>
-            <button id="btn-load-json" class="action-btn bg-blue-600 text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                Charger
+                Nouveau deck
             </button>
             <button id="btn-save-json" class="action-btn bg-emerald-600 text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
                 Sauvegarder
+            </button>
+        </div>
+        <div class="px-3 pb-2 grid grid-cols-2 gap-1.5">
+            <button id="btn-load-json" class="action-btn bg-blue-600 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                Charger
+            </button>
+            <button id="btn-reload-deck" class="action-btn bg-slate-500 text-white" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                Recharger
             </button>
         </div>
         <div class="px-3 pb-2 grid grid-cols-2 gap-1.5">
@@ -551,7 +557,10 @@ ni envoyer de messages.</textarea>
 <div id="minibar" class="w-[150px] flex-shrink-0 bg-slate-100 text-slate-900 h-screen flex flex-col border-r border-slate-300 z-[5]">
     <div class="bg-slate-700 text-white px-2.5 py-2.5 flex items-center justify-between flex-shrink-0">
         <span class="text-xs font-bold">Cartes</span>
-        <button id="minibar-refresh" title="Actualiser la liste" class="text-base leading-none hover:text-blue-300 transition-colors">⟳</button>
+        <div class="flex items-center gap-2">
+            <button id="minibar-add" title="Ajouter une carte au deck" class="text-base leading-none hover:text-green-300 transition-colors font-bold">+</button>
+            <button id="minibar-refresh" title="Actualiser l'affichage" class="text-base leading-none hover:text-blue-300 transition-colors">⟳</button>
+        </div>
     </div>
     <div id="minibar-list" class="overflow-y-auto flex-1 p-2 space-y-2"></div>
     <div id="minibar-status" class="text-[10px] text-slate-400 text-center px-1 pb-2 flex-shrink-0"></div>
@@ -575,7 +584,7 @@ ni envoyer de messages.</textarea>
             <div id="card-gap-1" style="flex-shrink:0;height:0;"></div>
 
             <div id="card-img-wrapper" class="flex w-full relative resize-zone min-h-[150px]">
-                <img id="card-img" src="image.png" alt="Illustration"
+                <img id="card-img" src="images/image.png" alt="Illustration" data-name="image.png"
                      class="object-contain w-[90%] max-h-full mx-auto">
             </div>
 
@@ -602,7 +611,7 @@ ni envoyer de messages.</div>
     </div>
 
     <div id="the-back" style="display:none;">
-        <img src="dos.png" alt="Dos de la carte">
+        <img src="images/dos.png" alt="Dos de la carte">
     </div>
   </div>
 </div>
@@ -617,11 +626,11 @@ ni envoyer de messages.</div>
 // ════════════════════════════════════════════════════════════
 const DEFAULTS = {
     mainColor:'#A93226', outerMargin:36,
-    iconSrc: 'icone_exclamation.png',
+    iconSrc: 'icones/icone_exclamation.png', iconName: 'icone_exclamation.png',
     layoutPercents: { header:12, image:50, desc:33, footer:5 },
     gapValues: { gap1:0, gap2:0, gap3:0 },
     titleText:'BOÎTE MAIL PLEINE', titleSize:75, titleAlign:'center',
-    imgWidth:90, imgAlign:'center', imgSrc:'image.png',
+    imgWidth:90, imgAlign:'center', imgSrc:'images/image.png', imgName:'image.png',
     descText:'Ta boîte mail est pleine.\nTu ne peux plus recevoir\nni envoyer de messages.',
     descSize:75, descAlign:'center',
     indText:'DÉFAUSSE IMMÉDIATE', indSize:69, indAlign:'center',
@@ -844,18 +853,25 @@ function updateSliderDisplays() {
 // ════════════════════════════════════════════════════════════
 //  ÉTAT
 // ════════════════════════════════════════════════════════════
+function filenameFromPath(src) {
+    if (!src || src.startsWith('data:') || src.startsWith('blob:')) return '';
+    return src.split('/').pop();
+}
+
 function getState() {
     return {
         mainColor: mainColorInput.value,
         outerMargin: +outerMarginInput.value,
-        iconSrc: cardIcon.dataset.src || null,
+        iconSrc:  cardIcon.dataset.src  || null,
+        iconName: cardIcon.dataset.name || filenameFromPath(cardIcon.dataset.src || ''),
         layoutPercents: { ...layoutState },
         gapValues: { ...gapState },
         titleText: titleTextInput.value, titleSize: +titleSizeInput.value,
         titleAlign: Array.from(titleAlignRadios).find(r=>r.checked)?.value || 'flex-start',
         imgWidth: +imgWidthInput.value,
         imgAlign: Array.from(imgAlignRadios).find(r=>r.checked)?.value || 'center',
-        imgSrc: cardImg.src,
+        imgSrc:  cardImg.src,
+        imgName: cardImg.dataset.name || filenameFromPath(cardImg.src),
         descText: descTextInput.value, descSize: +descSizeInput.value,
         descAlign: Array.from(descAlignRadios).find(r=>r.checked)?.value || 'center',
         indText: indTextInput.value, indSize: +indSizeInput.value,
@@ -887,8 +903,10 @@ function applyState(s) {
     setRadio('desc-align',  s.descAlign  ?? d.descAlign);
     setRadio('ind-align',   s.indAlign   ?? d.indAlign);
 
-    if (s.imgSrc) cardImg.src = s.imgSrc;
-    cardIcon.dataset.src = s.iconSrc ?? DEFAULTS.iconSrc ?? '';
+    if (s.imgSrc) { cardImg.src = s.imgSrc; }
+    cardImg.dataset.name  = s.imgName  || filenameFromPath(s.imgSrc || '') || '';
+    cardIcon.dataset.src  = s.iconSrc  ?? DEFAULTS.iconSrc ?? '';
+    cardIcon.dataset.name = s.iconName || filenameFromPath(s.iconSrc || '') || '';
     if (s.layoutPercents) { Object.assign(layoutState, s.layoutPercents); updateLayoutDisplay(); }
     if (s.gapValues) {
         Object.assign(gapState, s.gapValues);
@@ -906,7 +924,7 @@ function applyState(s) {
 function resetField(key) {
     const v = DEFAULTS[key];
     const map = {
-        iconSrc:       () => { cardIcon.dataset.src = DEFAULTS.iconSrc || ''; },
+        iconSrc:       () => { cardIcon.dataset.src = DEFAULTS.iconSrc || ''; cardIcon.dataset.name = DEFAULTS.iconName || ''; },
         layoutPercents:() => { Object.assign(layoutState, DEFAULTS.layoutPercents); updateLayoutDisplay(); applyLayoutPercents(); },
         mainColor:   () => { mainColorInput.value   = v; },
         outerMargin: () => { outerMarginInput.value  = v; },
@@ -937,6 +955,7 @@ document.querySelectorAll('.reset-btn').forEach(btn => {
 // ════════════════════════════════════════════════════════════
 let toastTimer;
 function autoSave() {
+    saveDeckCurrentState();
     const state = getState();
     try {
         localStorage.setItem('carte_autosave', JSON.stringify(state));
@@ -957,22 +976,224 @@ function restoreAutoSave() {
 }
 
 // ════════════════════════════════════════════════════════════
-//  SAUVEGARDE / CHARGEMENT JSON
+//  DECK — état et gestion du deck en cours
 // ════════════════════════════════════════════════════════════
-function saveJSON() {
-    const blob = new Blob([JSON.stringify(getState(), null, 2)], {type:'application/json'});
-    const a = Object.assign(document.createElement('a'), {
-        download: `carte_${new Date().toISOString().slice(0,10)}.json`,
-        href: URL.createObjectURL(blob)
-    });
-    a.click(); URL.revokeObjectURL(a.href);
+let deckCards = [];
+let currentCardIdx = 0;
+let lastDeckFile = null;
+
+function saveDeckCurrentState() {
+    if (deckCards.length > 0) deckCards[currentCardIdx] = getState();
 }
 
-function loadJSONFile(file) {
+function switchToDeckCard(idx) {
+    saveDeckCurrentState();
+    currentCardIdx = idx;
+    applyState(deckCards[idx]);
+    if (deckCards[idx].imgSrc) cardImg.src = deckCards[idx].imgSrc;
+    rebuildMinibarDeck();
+}
+
+function addCardToDeck() {
+    saveDeckCurrentState();
+    const blank = { ...DEFAULTS, titleText: `Carte ${deckCards.length + 1}`, imgSrc: null, iconSrc: null };
+    deckCards.push(blank);
+    currentCardIdx = deckCards.length - 1;
+    applyState(blank);
+    cardImg.src = '';
+    rebuildMinibarDeck();
+}
+
+function removeCardFromDeck(idx) {
+    if (deckCards.length <= 1) { alert('Le deck doit contenir au moins une carte.'); return; }
+    deckCards.splice(idx, 1);
+    if (currentCardIdx >= deckCards.length) currentCardIdx = deckCards.length - 1;
+    applyState(deckCards[currentCardIdx]);
+    if (deckCards[currentCardIdx].imgSrc) cardImg.src = deckCards[currentCardIdx].imgSrc;
+    rebuildMinibarDeck();
+}
+
+function rebuildMinibarDeck() {
+    minibarList.innerHTML = '';
+    deckCards.forEach((state, idx) => {
+        const el = renderMiniCard(state.titleText || `Carte ${idx + 1}`, state, () => switchToDeckCard(idx));
+        if (idx === currentCardIdx) el.classList.add('selected');
+        el.style.position = 'relative';
+        const delBtn = document.createElement('button');
+        delBtn.textContent = '×';
+        delBtn.title = 'Supprimer du deck';
+        delBtn.style.cssText = 'position:absolute;top:2px;right:2px;background:rgba(239,68,68,.85);color:#fff;border:none;border-radius:3px;cursor:pointer;font-size:11px;line-height:1;padding:1px 4px;opacity:0;transition:opacity .15s;z-index:10;';
+        el.addEventListener('mouseenter', () => delBtn.style.opacity = '1');
+        el.addEventListener('mouseleave', () => delBtn.style.opacity = '0');
+        delBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            if (!confirm('Supprimer cette carte du deck ?')) return;
+            removeCardFromDeck(idx);
+        });
+        el.appendChild(delBtn);
+        minibarList.appendChild(el);
+    });
+    minibarStatus.textContent = `${deckCards.length} carte(s)`;
+}
+
+// ════════════════════════════════════════════════════════════
+//  FORMAT DECK-V1 — sérialisation et parsing
+// ════════════════════════════════════════════════════════════
+function buildIconPool(states) {
+    const pool = [];
+    const seen = new Map(); // iconName -> id
+    states.forEach(s => {
+        const name = s.iconName || filenameFromPath(s.iconSrc || '');
+        if (name && !seen.has(name)) {
+            const id = pool.length + 1;
+            seen.set(name, id);
+            const t = (typeof cardTypes !== 'undefined' ? cardTypes : [])
+                .find(t => t.color?.toLowerCase() === (s.mainColor || '').toLowerCase());
+            pool.push({ id, label: t?.text || '', couleur: s.mainColor || '', src: name });
+        }
+    });
+    return { pool, seen };
+}
+
+function stateToDeckCard(s, iconesSeenByName) {
+    const iconName = s.iconName || filenameFromPath(s.iconSrc || '');
+    const icone_ref = (iconName && iconesSeenByName.has(iconName)) ? iconesSeenByName.get(iconName) : null;
+    const imgName = s.imgName || filenameFromPath(s.imgSrc || '') || null;
+    const lp = s.layoutPercents || { header:12, image:50, desc:33, footer:5 };
+    const gv = s.gapValues || { gap1:0, gap2:0, gap3:0 };
+    return {
+        titre:      s.titleText || '',
+        image:      imgName,
+        texte:      s.descText  || '',
+        indicateur: s.indText   || '',
+        icone_ref,
+        mise_en_forme: {
+            couleur:      s.mainColor,
+            marge:        s.outerMargin,
+            bonus:        !!s.bonusMode,
+            layout:       `${lp.header}/${lp.image}/${lp.desc}/${lp.footer}`,
+            gaps:         `${gv.gap1}/${gv.gap2}/${gv.gap3}`,
+            titre_taille: s.titleSize,
+            titre_align:  s.titleAlign,
+            img_largeur:  s.imgWidth,
+            img_align:    s.imgAlign,
+            texte_taille: s.descSize,
+            texte_align:  s.descAlign,
+            ind_taille:   s.indSize,
+            ind_align:    s.indAlign
+        }
+    };
+}
+
+function deckCardToState(card, icoPool) {
+    const mf  = card.mise_en_forme || {};
+    const ico = icoPool.find(i => i.id === card.icone_ref) || null;
+    const la  = (mf.layout || '12/50/33/5').split('/').map(Number);
+    const ga  = (mf.gaps   || '0/0/0').split('/').map(Number);
+    const imgName  = card.image  || null;
+    const iconName = ico ? ico.src : null; // ico.src contient le filename dans le pool
+    return {
+        mainColor:     mf.couleur    || '#A93226',
+        outerMargin:   mf.marge      ?? 36,
+        iconSrc:       iconName ? 'icones/' + iconName : null,
+        iconName,
+        layoutPercents:{ header: la[0]||12, image: la[1]||50, desc: la[2]||33, footer: la[3]||5 },
+        gapValues:     { gap1: ga[0]||0, gap2: ga[1]||0, gap3: ga[2]||0 },
+        titleText:     card.titre      || '',
+        titleSize:     mf.titre_taille ?? 75,
+        titleAlign:    mf.titre_align  || 'center',
+        imgWidth:      mf.img_largeur  ?? 90,
+        imgAlign:      mf.img_align    || 'center',
+        imgSrc:        imgName ? 'images/' + imgName : null,
+        imgName,
+        descText:      card.texte      || '',
+        descSize:      mf.texte_taille ?? 75,
+        descAlign:     mf.texte_align  || 'center',
+        indText:       card.indicateur || '',
+        indSize:       mf.ind_taille   ?? 69,
+        indAlign:      mf.ind_align    || 'center',
+        bonusMode:     !!mf.bonus,
+        sizingMode:    false
+    };
+}
+
+function serializeDeck(states) {
+    const { pool, seen } = buildIconPool(states);
+    const cartes = states.map(s => stateToDeckCard(s, seen));
+    const lines = [
+        '{',
+        '  "format": "deck-v1",',
+        `  "date": "${new Date().toISOString().slice(0,10)}",`,
+        '  "icones": ['
+    ];
+    pool.forEach((ic, i) => {
+        const comma = i < pool.length - 1 ? ',' : '';
+        lines.push(`    { "id": ${ic.id}, "label": ${JSON.stringify(ic.label)}, "couleur": ${JSON.stringify(ic.couleur)}, "src": ${JSON.stringify(ic.src)} }${comma}`);
+    });
+    lines.push('  ],', '  "cartes": [');
+    cartes.forEach((c, i) => {
+        const comma = i < cartes.length - 1 ? ',' : '';
+        lines.push(
+            '    {',
+            `      "titre": ${JSON.stringify(c.titre)},`,
+            `      "image": ${JSON.stringify(c.image)},`,
+            `      "texte": ${JSON.stringify(c.texte)},`,
+            `      "indicateur": ${JSON.stringify(c.indicateur)},`,
+            `      "icone_ref": ${c.icone_ref !== null ? c.icone_ref : 'null'},`,
+            `      "mise_en_forme": ${JSON.stringify(c.mise_en_forme)}`,
+            `    }${comma}`
+        );
+    });
+    lines.push('  ]', '}');
+    return lines.join('\n');
+}
+
+function parseDeckFile(json) {
+    const data = JSON.parse(json);
+    if (data.format === 'deck-v1') {
+        const pool = data.icones || [];
+        return (data.cartes || []).map(c => deckCardToState(c, pool));
+    }
+    // Compatibilité : ancien fichier monocarte (peut contenir des data URLs)
+    // On extrait le nom de fichier des data URL si possible, sinon on garde la data URL
+    const s = data;
+    if (s.imgSrc && !s.imgName) s.imgName = filenameFromPath(s.imgSrc);
+    if (s.iconSrc && !s.iconName) s.iconName = filenameFromPath(s.iconSrc);
+    return [s];
+}
+
+function saveDeckFile() {
+    saveDeckCurrentState();
+    const content = serializeDeck(deckCards);
+    const slug = (titleTextInput.value || 'deck').toLowerCase()
+        .replace(/[^a-z0-9]/g, '_').replace(/_+/g, '_').slice(0, 24)
+        + '_' + new Date().toISOString().slice(0, 10);
+    const blob = new Blob([content], { type: 'application/json' });
+    const a = Object.assign(document.createElement('a'), {
+        download: `${slug}.deck.json`,
+        href: URL.createObjectURL(blob)
+    });
+    a.click();
+    URL.revokeObjectURL(a.href);
+}
+
+function loadDeckFromStates(states) {
+    deckCards = states;
+    currentCardIdx = 0;
+    applyState(deckCards[0]);
+    if (deckCards[0].imgSrc) cardImg.src = deckCards[0].imgSrc;
+    rebuildMinibarDeck();
+    switchTab('editeur');
+}
+
+function loadDeckFile(file) {
+    lastDeckFile = file;
+    const reloadBtn = $('btn-reload-deck');
+    if (reloadBtn) reloadBtn.disabled = false;
     const reader = new FileReader();
     reader.onload = e => {
-        try { applyState(JSON.parse(e.target.result)); switchTab('editeur'); }
-        catch (_) { alert('Fichier JSON invalide.'); }
+        try { loadDeckFromStates(parseDeckFile(e.target.result)); }
+        catch (err) { alert('Fichier invalide : ' + err.message); }
     };
     reader.readAsText(file);
 }
@@ -1059,6 +1280,7 @@ async function exportCard(format) {
 // ════════════════════════════════════════════════════════════
 function handleImageUpload(file) {
     if (!file?.type.startsWith('image/')) return;
+    cardImg.dataset.name = file.name;
     const reader = new FileReader();
     reader.onload = e => { cardImg.src = e.target.result; autoSave(); };
     reader.readAsDataURL(file);
@@ -1080,6 +1302,7 @@ dz.addEventListener('drop', e => handleImageUpload(e.dataTransfer.files[0]));
 // ════════════════════════════════════════════════════════════
 function handleIconUpload(file) {
     if (!file?.type.startsWith('image/')) return;
+    cardIcon.dataset.name = file.name;
     const reader = new FileReader();
     reader.onload = e => {
         _iconCache = { src: null, img: null };
@@ -1369,37 +1592,36 @@ function renderExplorerCard(name, state, modified, onLoad, onDelete) {
 
 async function loadServerExplorer() {
     explorerStatus.textContent = 'Chargement…';
-    minibarStatus.textContent = '…';
-    clearCardViews();
+    explorerGrid.innerHTML = '';
     try {
         const files = await fetch('/api/cards').then(r => r.json());
         explorerStatus.textContent = files.length ? `${files.length} carte(s)` : 'Aucune carte sauvegardée.';
-        setCardCount(files.length);
         for (const { name, modified } of files) {
             try {
-                const state = await fetch(`/api/cards/${encodeURIComponent(name)}`).then(r => r.json());
-                const onLoad = s => { applyState(s); switchTab('editeur'); };
+                const data = await fetch(`/api/cards/${encodeURIComponent(name)}`).then(r => r.json());
+                const states = data.format === 'deck-v1'
+                    ? (data.icones || [], (data.cartes || []).map(c => deckCardToState(c, data.icones || [])))
+                    : [data];
+                const state = states[0] || {};
+                const onLoad = () => loadDeckFromStates(states);
                 explorerGrid.appendChild(renderExplorerCard(name, state, modified, onLoad,
                     () => fetch(`/api/cards/${encodeURIComponent(name)}`, { method: 'DELETE' })
                 ));
-                minibarList.appendChild(renderMiniCard(name, state, onLoad));
             } catch(_) {}
         }
     } catch(_) {
         explorerStatus.textContent = 'Serveur non disponible.';
-        minibarStatus.textContent = 'Hors-ligne';
     }
 }
 
 $('btn-open-dir').addEventListener('click', () => {
     if (SERVER_MODE) { loadServerExplorer(); }
     else if (window.showDirectoryPicker) {
-        // File System Access API fallback
         (async () => {
             try {
                 explorerStatus.textContent = 'Lecture du dossier…';
                 const dir = await window.showDirectoryPicker({ mode: 'read' });
-                clearCardViews();
+                explorerGrid.innerHTML = '';
                 const items = [];
                 for await (const [name, handle] of dir.entries()) {
                     if (handle.kind === 'file' && name.toLowerCase().endsWith('.json'))
@@ -1407,13 +1629,13 @@ $('btn-open-dir').addEventListener('click', () => {
                 }
                 items.sort((a,b) => a.name.localeCompare(b.name));
                 explorerStatus.textContent = items.length ? `${items.length} fichier(s)` : 'Aucun .json trouvé.';
-                setCardCount(items.length);
                 for (const { name, handle } of items) {
                     try {
-                        const state = JSON.parse(await (await handle.getFile()).text());
-                        const onLoad = s => { applyState(s); switchTab('editeur'); };
+                        const raw = await (await handle.getFile()).text();
+                        const states = parseDeckFile(raw);
+                        const state = states[0] || {};
+                        const onLoad = () => loadDeckFromStates(states);
                         explorerGrid.appendChild(renderExplorerCard(name, state, null, onLoad, () => {}));
-                        minibarList.appendChild(renderMiniCard(name, state, onLoad));
                     } catch(_) {}
                 }
             } catch(_) { explorerStatus.textContent = 'Annulé.'; }
@@ -1426,58 +1648,39 @@ $('btn-open-dir').addEventListener('click', () => {
 $('btn-load-multi-json').addEventListener('click', () => jsonMultiUpload.click());
 jsonMultiUpload.addEventListener('change', async e => {
     const files = Array.from(e.target.files);
-    clearCardViews();
+    explorerGrid.innerHTML = '';
     explorerStatus.textContent = `${files.length} fichier(s)`;
-    setCardCount(files.length);
     for (const file of files) {
         try {
-            const state = JSON.parse(await file.text());
-            const onLoad = s => { applyState(s); switchTab('editeur'); };
+            const raw = await file.text();
+            const states = parseDeckFile(raw);
+            const state = states[0] || {};
+            const onLoad = () => loadDeckFromStates(states);
             explorerGrid.appendChild(renderExplorerCard(file.name, state, null, onLoad, () => {}));
-            minibarList.appendChild(renderMiniCard(file.name, state, onLoad));
         } catch(_) {}
     }
     jsonMultiUpload.value = '';
 });
 
-// Bouton actualiser de la mini-barre
-$('minibar-refresh').addEventListener('click', () => $('btn-open-dir').click());
+$('minibar-refresh').addEventListener('click', () => rebuildMinibarDeck());
+$('minibar-add').addEventListener('click', () => addCardToDeck());
 
 // ════════════════════════════════════════════════════════════
 //  BOUTONS PRINCIPAUX
 // ════════════════════════════════════════════════════════════
 $('btn-nouveau').addEventListener('click', () => {
-    if (!confirm('Créer une nouvelle carte ? Les modifications non sauvegardées seront perdues.')) return;
+    if (!confirm('Créer un nouveau deck vide ? Le deck actuel non sauvegardé sera perdu.')) return;
     localStorage.removeItem('carte_autosave');
+    deckCards = [{ ...DEFAULTS }];
+    currentCardIdx = 0;
     applyState(DEFAULTS);
-    cardImg.src = DEFAULTS.imgSrc;
+    cardImg.src = DEFAULTS.imgSrc || '';
+    rebuildMinibarDeck();
 });
-$('btn-save-json').addEventListener('click', async () => {
-    if (SERVER_MODE) {
-        const suggested = (titleTextInput.value || 'carte').toLowerCase()
-            .replace(/[^a-z0-9\-_]/g, '_').replace(/_+/g,'_').slice(0,30)
-            + '_' + new Date().toISOString().slice(0,10);
-        const name = prompt('Nom de la carte :', suggested);
-        if (!name) return;
-        const filename = name.trim().replace(/\.json$/i,'') + '.json';
-        try {
-            const resp = await fetch(`/api/cards/${encodeURIComponent(filename)}`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(getState())
-            });
-            if (resp.ok) {
-                saveToast.style.opacity = '1';
-                clearTimeout(toastTimer);
-                toastTimer = setTimeout(() => { saveToast.style.opacity = '0'; }, 2000);
-            }
-        } catch(_) { alert('Serveur inaccessible — export JSON local.'); saveJSON(); }
-    } else {
-        saveJSON();
-    }
-});
+$('btn-save-json').addEventListener('click', () => saveDeckFile());
 $('btn-load-json').addEventListener('click', () => jsonUpload.click());
-jsonUpload.addEventListener('change', e => { if (e.target.files[0]) { loadJSONFile(e.target.files[0]); jsonUpload.value=''; } });
+$('btn-reload-deck').addEventListener('click', () => { if (lastDeckFile) loadDeckFile(lastDeckFile); });
+jsonUpload.addEventListener('change', e => { if (e.target.files[0]) { loadDeckFile(e.target.files[0]); jsonUpload.value = ''; } });
 $('btn-export-png').addEventListener('click', () => exportCard('png'));
 $('btn-export-jpg').addEventListener('click', () => exportCard('jpg'));
 $('btn-reset-all').addEventListener('click', () => {
@@ -1565,9 +1768,9 @@ function applyGaps() {
 //  TYPES DE CARTE (liste déroulante depuis config_types.json)
 // ════════════════════════════════════════════════════════════
 const DEFAULT_TYPES = [
-    { icon: 'icone_exclamation.png', color: '#A93226', text: 'VRAIMENT BLOQUANT' },
-    { icon: 'icone_inter.png',       color: '#2471A3', text: 'BON À SAVOIR' },
-    { icon: 'icone_ok.png',          color: '#1E8449', text: 'BON PRATIQUE' }
+    { icon: 'icones/icone_exclamation.png', color: '#A93226', text: 'VRAIMENT BLOQUANT' },
+    { icon: 'icones/icone_inter.png',       color: '#2471A3', text: 'BON À SAVOIR' },
+    { icon: 'icones/icone_ok.png',          color: '#1E8449', text: 'BON PRATIQUE' }
 ];
 let cardTypes = DEFAULT_TYPES.slice();
 
@@ -1651,27 +1854,13 @@ window.addEventListener('DOMContentLoaded', () => {
     // Restaurer l'état de la carte
     if (!restoreAutoSave()) applyState(DEFAULTS);
 
-    // Convertir image.png en data URL (fetch HTTP fonctionne en mode serveur)
-    if (!cardImg.src.startsWith('data:')) {
-        toDataURL(cardImg.src).then(dataUrl => {
-            if (dataUrl !== cardImg.src) { cardImg.src = dataUrl; cardImg.onload = () => autoSave(); }
-        });
-    }
-
-    // Convertir icone_exclamation.png en data URL
-    const iconSrcInit = cardIcon.dataset.src;
-    if (iconSrcInit && !iconSrcInit.startsWith('data:')) {
-        toDataURL(iconSrcInit).then(dataUrl => {
-            if (dataUrl !== iconSrcInit) { cardIcon.dataset.src = dataUrl; updateCard(); autoSave(); }
-        });
-    }
+    // Initialiser le deck avec la carte courante
+    deckCards = [getState()];
+    currentCardIdx = 0;
+    rebuildMinibarDeck();
 
     // Charger l'explorateur automatiquement si on est sur le serveur
-    if (SERVER_MODE) {
-        loadServerExplorer();
-    } else {
-        minibarStatus.textContent = 'Cliquez ⟳';
-    }
+    if (SERVER_MODE) loadServerExplorer();
 });
 </script>
 </body>
