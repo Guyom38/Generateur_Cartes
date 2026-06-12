@@ -12,8 +12,8 @@ Application HTML monofichier (`index.html`) sans build, sans framework JS, sans 
 
 **Dépendances CDN (chargées à l'exécution) :**
 - **Tailwind CSS** — utilitaires CSS via CDN
-- **html2canvas 1.4.1** — capture de la carte en PNG côté client
-- **Balsamiq Sans** (Google Fonts) — police style BD utilisée sur la carte
+- **html-to-image 1.11.13** — export PNG/JPG côté client via SVG `foreignObject` (rendu natif du navigateur, identique à l'aperçu)
+- **Baloo 2** (Google Fonts) — police style BD utilisée sur la carte
 
 **Structure interne du fichier :**
 1. `<style>` — CSS personnalisé qui complète Tailwind (carte, scrollbar, drag & drop, mode dimensionnement)
@@ -27,7 +27,7 @@ Application HTML monofichier (`index.html`) sans build, sans framework JS, sans 
 
 ## Carte (`#the-card`)
 
-Dimensions fixes 1055 × 1491 px (ratio A4 portrait), réduite à 60 % à l'écran via `transform: scale(0.6)`. Lors du téléchargement, le scale est retiré avant la capture `html2canvas` pour obtenir la pleine résolution.
+Dimensions fixes 1055 × 1491 px (ratio A4 portrait), réduite à 60 % à l'écran via `transform: scale(0.6)`. Lors du téléchargement, la carte est clonée hors écran à taille réelle (sans le scale d'aperçu) puis capturée avec `html-to-image` pour obtenir la pleine résolution.
 
 **Zones éditables dans la carte :**
 | ID | Rôle |

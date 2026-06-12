@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Générateur de Cartes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.13/html-to-image.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; overflow: hidden; }
@@ -1199,7 +1199,8 @@ function loadDeckFile(file) {
 }
 
 // ════════════════════════════════════════════════════════════
-//  EXPORT (PNG / JPG) — clone off-screen pour fiabilité
+//  EXPORT (PNG / JPG) — html-to-image (SVG foreignObject) :
+//  le navigateur dessine lui-même la carte, rendu identique à l'aperçu
 // ════════════════════════════════════════════════════════════
 // Convertit une URL en data URL via fetch (contourne le tainted canvas en file://)
 async function toDataURL(src) {
@@ -1228,41 +1229,38 @@ async function exportCard(format) {
             cardImg.src = await toDataURL(cardImg.src);
             await new Promise(r => { cardImg.onload = r; cardImg.onerror = r; setTimeout(r, 2000); });
         }
+        await document.fonts.ready;
 
-        const canvas = await html2canvas(theCard, {
-            backgroundColor: format === 'jpg' ? '#ffffff' : null,
-            scale: 1, useCORS: true, logging: false,
-            width: 1055, height: 1491,
-            onclone: (doc) => {
-                // Neutraliser le scale du conteneur (sinon la carte est capturée réduite)
-                const row = doc.getElementById('cards-row');
-                if (row) { row.style.transform = 'none'; row.style.margin = '0'; }
-                const el = doc.getElementById('the-card');
-                if (el) {
-                    el.style.transform     = 'none';
-                    el.style.marginTop     = '0';
-                    el.style.boxShadow     = 'none';
-                    el.style.width         = '1055px';
-                    el.style.height        = '1491px';
-                    el.style.flexShrink    = '0';
-                    el.style.overflow      = 'visible';
-                }
-                // Empêcher tout rognage du titre (déborde à cause du scaleX)
-                const innerB = doc.getElementById('card-inner-border');
-                if (innerB) innerB.style.overflow = 'visible';
-                const hdr = doc.getElementById('card-header-wrapper');
-                if (hdr) hdr.style.overflow = 'visible';
-                const title = doc.getElementById('card-title');
-                if (title) { title.style.position = 'relative'; title.style.top = '-50px'; title.style.overflow = 'visible'; }
-                const ind = doc.getElementById('card-ind');
-                if (ind) { ind.style.position = 'relative'; ind.style.top = '-40px'; }
-            }
-        });
+        // Clone hors écran à taille réelle, sans le scale d'aperçu du conteneur
+        const clone = theCard.cloneNode(true);
+        // cloneNode ne copie pas les pixels d'un <canvas>
+        const srcIcon = theCard.querySelector('#card-icon');
+        const dstIcon = clone.querySelector('#card-icon');
+        if (srcIcon && dstIcon) dstIcon.getContext('2d').drawImage(srcIcon, 0, 0);
+        clone.style.transform = 'none';
+        clone.style.margin    = '0';
+        clone.style.boxShadow = 'none';
+        clone.style.width     = '1055px';
+        clone.style.height    = '1491px';
 
-        const mime = format === 'jpg' ? 'image/jpeg' : 'image/png';
+        const holder = document.createElement('div');
+        holder.style.cssText = 'position:fixed;left:0;top:0;overflow:hidden;pointer-events:none;opacity:0;';
+        holder.appendChild(clone);
+        document.body.appendChild(holder);
+
+        let dataUrl;
+        try {
+            const opts = { width: 1055, height: 1491, pixelRatio: 1 };
+            dataUrl = format === 'jpg'
+                ? await htmlToImage.toJpeg(clone, { ...opts, quality: 0.95, backgroundColor: '#ffffff' })
+                : await htmlToImage.toPng(clone, opts);
+        } finally {
+            holder.remove();
+        }
+
         const a = Object.assign(document.createElement('a'), {
             download: `carte_${Date.now()}.${format}`,
-            href: canvas.toDataURL(mime, 0.95)
+            href: dataUrl
         });
         a.click();
 
