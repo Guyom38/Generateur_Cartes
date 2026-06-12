@@ -145,14 +145,20 @@
             </button>
         </div>
         <div class="px-3 pb-2 grid grid-cols-2 gap-1.5">
-            <button id="btn-export-png" class="action-btn bg-slate-500 text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                Exporter PNG
-            </button>
-            <button id="btn-export-jpg" class="action-btn bg-amber-500 text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                Exporter JPG
-            </button>
+            <div class="flex gap-1">
+                <button id="btn-export-png" class="action-btn bg-slate-500 text-white flex-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    Exporter PNG
+                </button>
+                <button id="btn-export-all-png" title="Exporter toutes les cartes du deck en PNG" class="action-btn bg-slate-700 text-white" style="padding:7px 5px;font-size:9px;">TOUT</button>
+            </div>
+            <div class="flex gap-1">
+                <button id="btn-export-jpg" class="action-btn bg-amber-500 text-white flex-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    Exporter JPG
+                </button>
+                <button id="btn-export-all-jpg" title="Exporter toutes les cartes du deck en JPG" class="action-btn bg-amber-600 text-white" style="padding:7px 5px;font-size:9px;">TOUT</button>
+            </div>
         </div>
 
         <!-- Onglets -->
@@ -176,7 +182,11 @@
                     <span class="font-bold text-sm text-slate-800">Apparence</span>
                 </div>
                 <div class="mb-3">
-                    <div class="field-label"><label>Type de carte</label></div>
+                    <div class="field-label">
+                        <label>Type de carte</label>
+                        <button id="type-add-btn" type="button" title="Ajouter à la liste les types utilisés par les cartes du deck et de la bibliothèque"
+                            class="text-[10px] font-bold text-blue-600 hover:text-blue-800 bg-blue-50 border border-blue-200 rounded px-1.5 py-0.5 transition-colors">+ Types utilisés</button>
+                    </div>
                     <div id="type-dropdown" class="relative">
                         <button id="type-dropdown-btn" type="button" class="w-full flex items-center gap-2 p-2 border border-gray-200 rounded-lg text-sm bg-white hover:border-blue-400 transition-colors">
                             <img id="type-current-icon" src="" alt="" class="w-5 h-5 object-contain" style="display:none;">
@@ -401,7 +411,7 @@ ni envoyer de messages.</textarea>
                                 <span id="desc-size-display" class="val-badge">75px</span>
                             </div>
                         </div>
-                        <input type="range" id="desc-size" min="30" max="150" value="75" data-unit="px" class="w-full">
+                        <input type="range" id="desc-size" min="10" max="150" value="75" data-unit="px" class="w-full">
                     </div>
                     <div>
                         <div class="field-label">
@@ -453,6 +463,28 @@ ni envoyer de messages.</textarea>
                             <label class="align-btn flex-1 text-center cursor-pointer"><input type="radio" name="ind-align" value="center" checked class="hidden"><div class="py-1.5 text-xs text-gray-500">C</div></label>
                             <label class="align-btn flex-1 text-center cursor-pointer"><input type="radio" name="ind-align" value="right" class="hidden"><div class="py-1.5 text-xs text-gray-500">D</div></label>
                         </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <div class="field-label">
+                            <label>Position ligne</label>
+                            <div class="field-label-right">
+                                <button class="reset-btn" data-reset="hrOffset" title="Défaut">↺</button>
+                                <span id="hr-offset-display" class="val-badge">0px</span>
+                            </div>
+                        </div>
+                        <input type="range" id="hr-offset" min="-100" max="200" value="0" data-unit="px" class="w-full">
+                    </div>
+                    <div>
+                        <div class="field-label">
+                            <label>Position texte</label>
+                            <div class="field-label-right">
+                                <button class="reset-btn" data-reset="indOffset" title="Défaut">↺</button>
+                                <span id="ind-offset-display" class="val-badge">0px</span>
+                            </div>
+                        </div>
+                        <input type="range" id="ind-offset" min="-200" max="200" value="0" data-unit="px" class="w-full">
                     </div>
                 </div>
             </div>
@@ -634,6 +666,7 @@ const DEFAULTS = {
     descText:'Ta boîte mail est pleine.\nTu ne peux plus recevoir\nni envoyer de messages.',
     descSize:75, descAlign:'center',
     indText:'DÉFAUSSE IMMÉDIATE', indSize:69, indAlign:'center',
+    hrOffset:0, indOffset:0,
     bonusMode:false, sizingMode:false
 };
 
@@ -657,6 +690,8 @@ const descAlignRadios = document.getElementsByName('desc-align');
 const indTextInput   = $('ind-text');
 const indSizeInput   = $('ind-size');
 const indAlignRadios = document.getElementsByName('ind-align');
+const hrOffsetInput  = $('hr-offset');
+const indOffsetInput = $('ind-offset');
 const fileUpload     = $('file-upload');
 const jsonUpload     = $('json-upload');
 const jsonMultiUpload = $('json-multi-upload');
@@ -672,6 +707,7 @@ const cardImg        = $('card-img');
 const cardDesc       = $('card-desc');
 const cardHr         = $('card-hr');
 const cardInd        = $('card-ind');
+const cardIndWrapper = $('card-ind-wrapper');
 const saveToast      = $('save-toast');
 const cardPreview    = $('card-preview-container');
 
@@ -836,6 +872,10 @@ function updateCard() {
     cardDesc.style.textAlign = Array.from(descAlignRadios).find(r => r.checked)?.value || 'center';
     cardInd.style.textAlign  = Array.from(indAlignRadios).find(r => r.checked)?.value || 'center';
 
+    // Décalages verticaux du pied de carte (ligne et texte)
+    cardHr.style.transform         = +hrOffsetInput.value  ? `translateY(${hrOffsetInput.value}px)`  : 'none';
+    cardIndWrapper.style.transform = +indOffsetInput.value ? `translateY(${indOffsetInput.value}px)` : 'none';
+
     updateSliderDisplays();
     applyLayoutPercents();
     applyGaps();
@@ -876,6 +916,7 @@ function getState() {
         descAlign: Array.from(descAlignRadios).find(r=>r.checked)?.value || 'center',
         indText: indTextInput.value, indSize: +indSizeInput.value,
         indAlign: Array.from(indAlignRadios).find(r=>r.checked)?.value || 'center',
+        hrOffset: +hrOffsetInput.value, indOffset: +indOffsetInput.value,
         bonusMode: bonusModeEl.checked, sizingMode: sizingModeEl.checked
     };
 }
@@ -891,6 +932,8 @@ function applyState(s) {
     descSizeInput.value     = s.descSize     ?? d.descSize;
     indTextInput.value      = s.indText      ?? d.indText;
     indSizeInput.value      = s.indSize      ?? d.indSize;
+    hrOffsetInput.value     = s.hrOffset     ?? d.hrOffset;
+    indOffsetInput.value    = s.indOffset    ?? d.indOffset;
     bonusModeEl.checked     = s.bonusMode    ?? false;
     sizingModeEl.checked    = s.sizingMode   ?? false;
 
@@ -935,6 +978,8 @@ function resetField(key) {
         descSize:    () => { descSizeInput.value     = v; },
         indText:     () => { indTextInput.value      = v; },
         indSize:     () => { indSizeInput.value      = v; },
+        hrOffset:    () => { hrOffsetInput.value     = v; },
+        indOffset:   () => { indOffsetInput.value    = v; },
         titleAlign:  () => { document.querySelector(`input[name="title-align"][value="${v}"]`).checked = true; },
         imgAlign:    () => { document.querySelector(`input[name="img-align"][value="${v}"]`).checked   = true; },
         descAlign:   () => { document.querySelector(`input[name="desc-align"][value="${v}"]`).checked  = true; },
@@ -981,6 +1026,7 @@ function restoreAutoSave() {
 let deckCards = [];
 let currentCardIdx = 0;
 let lastDeckFile = null;
+let libraryStates = []; // états des cartes affichées dans l'explorateur (bibliothèque)
 
 function saveDeckCurrentState() {
     if (deckCards.length > 0) deckCards[currentCardIdx] = getState();
@@ -1080,7 +1126,9 @@ function stateToDeckCard(s, iconesSeenByName) {
             texte_taille: s.descSize,
             texte_align:  s.descAlign,
             ind_taille:   s.indSize,
-            ind_align:    s.indAlign
+            ind_align:    s.indAlign,
+            ligne_offset: s.hrOffset ?? 0,
+            ind_offset:   s.indOffset ?? 0
         }
     };
 }
@@ -1112,6 +1160,8 @@ function deckCardToState(card, icoPool) {
         indText:       card.indicateur || '',
         indSize:       mf.ind_taille   ?? 69,
         indAlign:      mf.ind_align    || 'center',
+        hrOffset:      mf.ligne_offset ?? 0,
+        indOffset:     mf.ind_offset   ?? 0,
         bonusMode:     !!mf.bonus,
         sizingMode:    false
     };
@@ -1270,6 +1320,68 @@ async function exportCard(format) {
     } finally {
         btn.innerHTML = orig;
         btn.disabled  = false;
+    }
+}
+
+// Rend un état de carte (hors écran) et renvoie la data URL de l'image
+async function renderStateToDataUrl(s, format) {
+    const st = { ...s };
+    if (st.imgSrc  && !st.imgSrc.startsWith('data:'))  st.imgSrc  = await toDataURL(st.imgSrc);
+    if (st.iconSrc && !st.iconSrc.startsWith('data:')) st.iconSrc = await toDataURL(st.iconSrc);
+
+    const clone  = theCard.cloneNode(true);
+    const holder = document.createElement('div');
+    holder.style.cssText = 'position:fixed;left:0;top:0;width:1055px;height:1491px;overflow:hidden;pointer-events:none;opacity:0;';
+    holder.appendChild(clone);
+    document.body.appendChild(holder);
+    try {
+        applyStateToCard(clone, st);
+        // Attendre le chargement de l'image centrale et le dessin de l'icône
+        const img = clone.querySelector('img');
+        if (img && img.src) { try { await img.decode(); } catch(_) {} }
+        await new Promise(r => setTimeout(r, 120));
+
+        const opts = { width: 1055, height: 1491, pixelRatio: 1 };
+        return format === 'jpg'
+            ? await htmlToImage.toJpeg(clone, { ...opts, quality: 0.95, backgroundColor: '#ffffff' })
+            : await htmlToImage.toPng(clone, opts);
+    } finally {
+        holder.remove();
+    }
+}
+
+function slugifyTitle(t) {
+    return (t || '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 30) || 'carte';
+}
+
+// Exporte toutes les cartes du deck (un fichier par carte)
+async function exportAllCards(format) {
+    const btn  = $(`btn-export-all-${format}`);
+    const orig = btn.textContent;
+    btn.disabled = true;
+    $(`btn-export-${format}`).disabled = true;
+
+    try {
+        saveDeckCurrentState();
+        await document.fonts.ready;
+        for (let i = 0; i < deckCards.length; i++) {
+            btn.textContent = `${i + 1}/${deckCards.length}`;
+            const dataUrl = await renderStateToDataUrl(deckCards[i], format);
+            const a = Object.assign(document.createElement('a'), {
+                download: `carte_${String(i + 1).padStart(2, '0')}_${slugifyTitle(deckCards[i].titleText)}.${format}`,
+                href: dataUrl
+            });
+            a.click();
+            // Laisser le navigateur traiter chaque téléchargement
+            await new Promise(r => setTimeout(r, 300));
+        }
+    } catch (err) {
+        console.error('Export all error:', err);
+        alert('Erreur lors de l\'export : ' + err.message);
+    } finally {
+        btn.textContent = orig;
+        btn.disabled = false;
+        $(`btn-export-${format}`).disabled = false;
     }
 }
 
@@ -1460,6 +1572,11 @@ function applyStateToCard(root, s) {
     desc.style.textAlign = s.descAlign || 'center';
     ind.style.textAlign  = s.indAlign  || 'center';
 
+    // Décalages verticaux du pied de carte (le clone hérite des transforms de la carte live)
+    hr.style.transform = s.hrOffset ? `translateY(${s.hrOffset}px)` : 'none';
+    const indWrap = q('#card-ind-wrapper');
+    if (indWrap) indWrap.style.transform = s.indOffset ? `translateY(${s.indOffset}px)` : 'none';
+
     // Répartition verticale
     const lp = s.layoutPercents || { header:12, image:50, desc:33, footer:5 };
     [[hdr,lp.header],[imgW,lp.image],[desc,lp.desc],[footer,lp.footer]]
@@ -1591,6 +1708,7 @@ function renderExplorerCard(name, state, modified, onLoad, onDelete) {
 async function loadServerExplorer() {
     explorerStatus.textContent = 'Chargement…';
     explorerGrid.innerHTML = '';
+    libraryStates = [];
     try {
         const files = await fetch('/api/cards').then(r => r.json());
         explorerStatus.textContent = files.length ? `${files.length} carte(s)` : 'Aucune carte sauvegardée.';
@@ -1600,6 +1718,7 @@ async function loadServerExplorer() {
                 const states = data.format === 'deck-v1'
                     ? (data.icones || [], (data.cartes || []).map(c => deckCardToState(c, data.icones || [])))
                     : [data];
+                libraryStates.push(...states);
                 const state = states[0] || {};
                 const onLoad = () => loadDeckFromStates(states);
                 explorerGrid.appendChild(renderExplorerCard(name, state, modified, onLoad,
@@ -1620,6 +1739,7 @@ $('btn-open-dir').addEventListener('click', () => {
                 explorerStatus.textContent = 'Lecture du dossier…';
                 const dir = await window.showDirectoryPicker({ mode: 'read' });
                 explorerGrid.innerHTML = '';
+                libraryStates = [];
                 const items = [];
                 for await (const [name, handle] of dir.entries()) {
                     if (handle.kind === 'file' && name.toLowerCase().endsWith('.json'))
@@ -1631,6 +1751,7 @@ $('btn-open-dir').addEventListener('click', () => {
                     try {
                         const raw = await (await handle.getFile()).text();
                         const states = parseDeckFile(raw);
+                        libraryStates.push(...states);
                         const state = states[0] || {};
                         const onLoad = () => loadDeckFromStates(states);
                         explorerGrid.appendChild(renderExplorerCard(name, state, null, onLoad, () => {}));
@@ -1647,11 +1768,13 @@ $('btn-load-multi-json').addEventListener('click', () => jsonMultiUpload.click()
 jsonMultiUpload.addEventListener('change', async e => {
     const files = Array.from(e.target.files);
     explorerGrid.innerHTML = '';
+    libraryStates = [];
     explorerStatus.textContent = `${files.length} fichier(s)`;
     for (const file of files) {
         try {
             const raw = await file.text();
             const states = parseDeckFile(raw);
+            libraryStates.push(...states);
             const state = states[0] || {};
             const onLoad = () => loadDeckFromStates(states);
             explorerGrid.appendChild(renderExplorerCard(file.name, state, null, onLoad, () => {}));
@@ -1681,6 +1804,8 @@ $('btn-reload-deck').addEventListener('click', () => { if (lastDeckFile) loadDec
 jsonUpload.addEventListener('change', e => { if (e.target.files[0]) { loadDeckFile(e.target.files[0]); jsonUpload.value = ''; } });
 $('btn-export-png').addEventListener('click', () => exportCard('png'));
 $('btn-export-jpg').addEventListener('click', () => exportCard('jpg'));
+$('btn-export-all-png').addEventListener('click', () => exportAllCards('png'));
+$('btn-export-all-jpg').addEventListener('click', () => exportAllCards('jpg'));
 $('btn-reset-all').addEventListener('click', () => {
     if (!confirm('Réinitialiser tous les paramètres aux valeurs par défaut ?')) return;
     applyState(DEFAULTS);
@@ -1784,10 +1909,79 @@ function buildTypeMenu() {
         const opt = document.createElement('button');
         opt.type = 'button';
         opt.className = 'w-full flex items-center gap-2 p-2 text-sm text-left hover:bg-blue-50 transition-colors';
-        opt.innerHTML = `<img src="${t.icon}" class="w-5 h-5 object-contain" alt=""><span class="font-semibold text-slate-700">${t.text}</span>`;
+        opt.innerHTML = (t.icon ? `<img src="${t.icon}" class="w-5 h-5 object-contain" alt="">` : '<span class="w-5 h-5 inline-block rounded-full" style="background:' + (t.color || '#A93226') + '"></span>')
+            + `<span class="font-semibold text-slate-700 flex-1">${t.text}</span>`;
         opt.addEventListener('click', () => { applyType(i); typeMenu.classList.add('hidden'); });
+        if (t.custom) {
+            const del = document.createElement('span');
+            del.textContent = '✕';
+            del.title = 'Retirer ce type de la liste';
+            del.className = 'text-slate-300 hover:text-red-500 px-1 flex-shrink-0';
+            del.addEventListener('click', e => {
+                e.stopPropagation();
+                cardTypes.splice(i, 1);
+                saveCustomTypes(loadCustomTypes().filter(c => typeKey(c) !== typeKey(t)));
+                buildTypeMenu();
+                refreshTypeDisplay();
+            });
+            opt.appendChild(del);
+        }
         typeMenu.appendChild(opt);
     });
+}
+
+// Types personnalisés (ajoutés depuis le deck/bibliothèque), persistés en localStorage
+function typeKey(t) { return (t.color || '').trim().toLowerCase() + '|' + (t.text || '').trim().toLowerCase(); }
+function loadCustomTypes() {
+    try { return JSON.parse(localStorage.getItem('carte_custom_types') || '[]'); } catch(_) { return []; }
+}
+function saveCustomTypes(list) {
+    try { localStorage.setItem('carte_custom_types', JSON.stringify(list)); } catch(_) {}
+}
+function mergeCustomTypes() {
+    // Dédoublonner la liste de base (config + défauts)
+    const seen = new Set();
+    cardTypes = cardTypes.filter(t => {
+        const k = typeKey(t);
+        if (seen.has(k)) return false;
+        seen.add(k);
+        return true;
+    });
+    // Fusionner les types personnalisés en purgeant les doublons stockés
+    const cleaned = [];
+    loadCustomTypes().forEach(t => {
+        const k = typeKey(t);
+        if (seen.has(k)) return;
+        seen.add(k);
+        cleaned.push(t);
+        cardTypes.push({ ...t, custom: true });
+    });
+    saveCustomTypes(cleaned);
+}
+
+// Scanne le deck courant + les cartes de la bibliothèque et ajoute les types inédits
+function addTypesFromLibrary() {
+    saveDeckCurrentState();
+    const seen = new Set(cardTypes.map(typeKey));
+    const customs = loadCustomTypes();
+    let added = 0;
+    [...deckCards, ...libraryStates].forEach(s => {
+        const t = { icon: s.iconSrc || null, color: s.mainColor || '#A93226', text: (s.indText || '').trim(), custom: true };
+        if (!t.text || seen.has(typeKey(t))) return;
+        seen.add(typeKey(t));
+        cardTypes.push(t);
+        customs.push(t);
+        added++;
+    });
+    if (added) {
+        saveCustomTypes(customs);
+        buildTypeMenu();
+        refreshTypeDisplay();
+    }
+    const btn = $('type-add-btn');
+    const orig = btn.textContent;
+    btn.textContent = added ? `${added} type(s) ajouté(s)` : 'Aucun nouveau type';
+    setTimeout(() => { btn.textContent = orig; }, 1800);
 }
 
 function setTypeDisplay(t) {
@@ -1823,11 +2017,13 @@ async function loadTypeConfig() {
         const cfg = await fetch('config_types.json').then(r => r.json());
         if (cfg && Array.isArray(cfg.types) && cfg.types.length) cardTypes = cfg.types;
     } catch(_) { /* repli sur DEFAULT_TYPES (mode file://) */ }
+    mergeCustomTypes();
     buildTypeMenu();
     refreshTypeDisplay();
 }
 
 typeBtn.addEventListener('click', e => { e.stopPropagation(); typeMenu.classList.toggle('hidden'); });
+$('type-add-btn').addEventListener('click', addTypesFromLibrary);
 document.addEventListener('click', e => { if (!typeDropdown.contains(e.target)) typeMenu.classList.add('hidden'); });
 
 // ════════════════════════════════════════════════════════════
