@@ -1,0 +1,319 @@
+{
+  "format": "deck-v1",
+  "date": "2026-06-15",
+  "icones": [
+    { "id": 1, "label": "BONNE PRATIQUE", "couleur": "#2760b0", "src": "ico_rediger.png" },
+    { "id": 2, "label": "ATELIER", "couleur": "#255f0c", "src": "ico_organiser.png" },
+    { "id": 3, "label": "POUR INFORMATION", "couleur": "#a0630d", "src": "ico_stocker.png" },
+    { "id": 4, "label": "VRAIMENT BLOQUANT", "couleur": "#a93226", "src": "ico_proteger.png" },
+    { "id": 5, "label": "ATELIER", "couleur": "#7b0f99", "src": "ico_outlook.png" },
+    { "id": 6, "label": "", "couleur": "#2896aa", "src": "icone_indicateur.png" },
+    { "id": 7, "label": "VRAIMENT BLOQUANT", "couleur": "#a93226", "src": "icone_exclamation.png" }
+  ],
+  "cartes": [
+    {
+      "titre": "L'Objet : votre vitrine",
+      "image": "image_00.png",
+      "texte": "Précis, court, actionnable.\nRésumez l'action attendue.\nMettez-le à jour si sujet change.\nÉvitez les Re: Re: Re:",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 1,
+      "mise_en_forme": {"couleur":"#2760b0","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":40,"ind_offset":14}
+    },
+    {
+      "titre": "La règle des 5 lignes",
+      "image": "image_01.png",
+      "texte": "Court = lu. Long = ignoré.\nSi plus de 5 lignes :\nréunion ou document dédié.\nSoyez direct, allez à l'essentiel.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 1,
+      "mise_en_forme": {"couleur":"#275bb0","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "LE BON TON",
+      "image": "image_02.png",
+      "texte": "Formel avec client ou direction.\nDirect en interne, c'est ok.\nRelisez avant d'envoyer.\nJamais sous le coup d'émotion.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 1,
+      "mise_en_forme": {"couleur":"#275bb0","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "A, CC, CCI\nles bons champs",
+      "image": "image_03.png",
+      "texte": "A = destinataire qui agit.\nCC = informé, pas d'action.\nCCI = adresse cachée.\nNe pas abuser du CC.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 1,
+      "mise_en_forme": {"couleur":"#275bb0","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Répondre à tous",
+      "image": "image_04.png",
+      "texte": "80% du temps : inutile.\nSeul l'expéditeur a besoin.\nÉvitez de polluer les boîtes.\nRéfléchissez avant de cliquer.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 1,
+      "mise_en_forme": {"couleur":"#275bb0","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Vérifiez le destinataire",
+      "image": "image_05.png",
+      "texte": "L'auto-complétion peut tromper.\nUn prénom = plusieurs contacts.\nMail confidentiel = risque réel.\n3 secondes peuvent tout éviter.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 1,
+      "mise_en_forme": {"couleur":"#275bb0","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Quand ne pas mailer",
+      "image": "image_06.png",
+      "texte": "Urgence ? Appelez.\nDiscussion complexe ? Réunissez.\nSuivi projet ? Utilisez Zoom.\nLe mail n'est pas temps réel.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 1,
+      "mise_en_forme": {"couleur":"#275bb0","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Éviter les mails parasites",
+      "image": "image_07.png",
+      "texte": "'OK', 'Merci', 'Reçu' : inutiles.\nCela encombre sans valeur.\n\nUtilisez l'accusé Outlook.\nRépondez si vous ajoutez quelque chose.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 1,
+      "mise_en_forme": {"couleur":"#275bb0","marge":36,"bonus":false,"layout":"12/38/45/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Gérer les fils de discussion",
+      "image": "image_08.png",
+      "texte": "Sujet change = nouvel objet.\nNe pas dériver dans un fil.\nFacilite la recherche future.\nÉvitez les fils sans fin.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 1,
+      "mise_en_forme": {"couleur":"#2760b0","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "La règle des 4D",
+      "image": "image_09.png",
+      "texte": "Do : traiter si moins 2 min.\nDefer : planifier pour plus tard.\nDelegate : transférer au bon.\nDelete : supprimer sans culpabilité.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 2,
+      "mise_en_forme": {"couleur":"#255f0c","marge":36,"bonus":false,"layout":"12/42/41/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Dossiers et règles autoMATIQUES",
+      "image": "image_10.png",
+      "texte": "Créez des dossiers thématiques.\nConfigurez des règles Outlook.\nLe tri se fait tout seul.\nBoîte de réception allégée.",
+      "indicateur": "POUR INFORMATION",
+      "icone_ref": 2,
+      "mise_en_forme": {"couleur":"#255f0c","marge":36,"bonus":false,"layout":"12/51/32/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Outlook ≠ base de connaissance",
+      "image": "image_11.png",
+      "texte": "Garder tout = trouver rien.\nL'info vit dans Zoom.\nLa boîte = communiquer, pas stocker.\nUn mail traité = archivé ou supprimé.",
+      "indicateur": "POUR INFORMATION",
+      "icone_ref": 2,
+      "mise_en_forme": {"couleur":"#255f0c","marge":36,"bonus":false,"layout":"12/54/29/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":66,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Plages de consultation",
+      "image": "image_12.png",
+      "texte": "Toutes les 6 min = distraction.\nDéfinissez 2-3 plages fixes.\nDésactivez les notifications.\nReprenez le contrôle de votre temps.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 2,
+      "mise_en_forme": {"couleur":"#255f0c","marge":36,"bonus":false,"layout":"12/54/29/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":64,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Inbox Zero",
+      "image": "image_13.png",
+      "texte": "Zéro décision en attente.\nChaque mail = une action.\nArchiver, supprimer ou planifier.\nBoîte vide = esprit libre.",
+      "indicateur": "DÉFAUSSE IMMÉDIATE",
+      "icone_ref": 2,
+      "mise_en_forme": {"couleur":"#255f0c","marge":36,"bonus":false,"layout":"12/51/32/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "LA BOÎTE PLEINE",
+      "image": "image.png",
+      "texte": "Boîte saturée = mails bloqués.\nImpact sur tout le serveur.\nCoût technique et humain.\nVidez régulièrement.",
+      "indicateur": "POUR INFORMATION",
+      "icone_ref": 3,
+      "mise_en_forme": {"couleur":"#a0630d","marge":36,"bonus":false,"layout":"12/51/32/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Pièces jointes : \n10 Mo max",
+      "image": "image_10m.png",
+      "texte": "Au-delà : envoi bloqué.\nPréférez un lien SharePoint.\nÉvitez de dupliquer les fichiers.\nUn lien = toujours à jour.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 3,
+      "mise_en_forme": {"couleur":"#a0630d","marge":36,"bonus":false,"layout":"12/51/32/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "La clé USB pour archives",
+      "image": "image_cleusb.png",
+      "texte": "Support nomade mais fragile.\nPas chiffrée = données exposées.\nPas de doublon = risque de perte.\nPréférez un stockage réseau.",
+      "indicateur": "POUR INFORMATION",
+      "icone_ref": 3,
+      "mise_en_forme": {"couleur":"#a0630d","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Durées légales de conservation",
+      "image": "image_14.png",
+      "texte": "Contrats : 5 ans minimum.\nComptabilité : 10 ans.\nRenseignez-vous selon activité.\nNe pas tout garder indéfiniment.",
+      "indicateur": "POUR INFORMATION",
+      "icone_ref": 3,
+      "mise_en_forme": {"couleur":"#a0630d","marge":36,"bonus":false,"layout":"12/52/31/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Phishing : restez vigilant",
+      "image": "image_15.png",
+      "texte": "Vérifiez l'adresse expéditeur.\nMéfiez-vous des liens urgents.\nPièce jointe inattendue = danger.\nDoute ? N'ouvrez pas.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 4,
+      "mise_en_forme": {"couleur":"#a93226","marge":36,"bonus":false,"layout":"12/52/31/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Données sensibles interdites",
+      "image": "image_16.png",
+      "texte": "Mot de passe ? Jamais par mail.\nRIB, données médicales : idem.\nLe mail n'est pas chiffré.\nIl peut être intercepté.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 4,
+      "mise_en_forme": {"couleur":"#a93226","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "RGPD : minimiser les données",
+      "image": "image_17.png",
+      "texte": "Mail = donnée personnelle possible.\nN'inclure que le strict nécessaire.\nPas de liste avec adresses en clair.\nMinimisez, c'est la loi.",
+      "indicateur": "POUR INFORMATION",
+      "icone_ref": 4,
+      "mise_en_forme": {"couleur":"#a93226","marge":36,"bonus":false,"layout":"12/52/30/6","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":67,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Confidentialité des échanges",
+      "image": "image_27.png",
+      "texte": "Mails pro = visibles par employeur.\nPas d'échanges perso sensibles.\nAttention aux CC involontaires.\nRéfléchissez avant d'écrire.",
+      "indicateur": "POUR INFORMATION",
+      "icone_ref": 4,
+      "mise_en_forme": {"couleur":"#a93226","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Vérifier avant d'envoyer",
+      "image": "image_18.png",
+      "texte": "Auto-complétion = piège fréquent.\nUn prénom = plusieurs contacts.\nConfidentiel mal adressé = risque.\nVérifiez chaque destinataire.",
+      "indicateur": "BONNE PRATIQUE",
+      "icone_ref": 4,
+      "mise_en_forme": {"couleur":"#a93226","marge":36,"bonus":false,"layout":"12/53/30/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":67,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Le délai d'envoi",
+      "image": "image_19.png",
+      "texte": "Configurez un délai de 30 sec.\nAnnulez avant qu'il parte.\nÉvite les envois regrettables.\nUne habitude qui sauve.",
+      "indicateur": "ATELIER",
+      "icone_ref": 5,
+      "mise_en_forme": {"couleur":"#7b0f99","marge":36,"bonus":false,"layout":"12/51/32/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "La signature professionnelle",
+      "image": "image_20.png",
+      "texte": "Nom, fonction, coordonnées, logo.\nDeux signatures : longue et courte.\nImage de marque cohérente.\nConfigurez une fois pour toujours.",
+      "indicateur": "ATELIER",
+      "icone_ref": 5,
+      "mise_en_forme": {"couleur":"#7b0f99","marge":36,"bonus":false,"layout":"12/55/28/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":63,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Les règles automatiques",
+      "image": "image_21.png",
+      "texte": "\nCritères = tri automatique.\nExpéditeur, objet, mots-clés...\nConfiguration unique, gain quotidien.\nOutlook trie à votre place.",
+      "indicateur": "ATELIER",
+      "icone_ref": 5,
+      "mise_en_forme": {"couleur":"#7b0f99","marge":36,"bonus":false,"layout":"12/47/33/8","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":67,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Le rappel d'absence",
+      "image": "image_22.png",
+      "texte": "Durée, contact urgence, délais.\nMessage clair et complet.\nDésactivez au retour.\nÉvitez les réponses sans info.",
+      "indicateur": "ATELIER",
+      "icone_ref": 5,
+      "mise_en_forme": {"couleur":"#7b0f99","marge":36,"bonus":false,"layout":"12/51/32/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "La recherche avancée",
+      "image": "image_23.png",
+      "texte": "Filtrez par expéditeur, date, objet.\nPièce jointe, dossier, mots-clés.\nRetrouvez en secondes, pas minutes.\nMaîtrisez cet outil précieux.",
+      "indicateur": "ATELIER",
+      "icone_ref": 5,
+      "mise_en_forme": {"couleur":"#7b0f99","marge":36,"bonus":false,"layout":"12/54/29/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":69,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Accusé et suivi de lecture",
+      "image": "image_24.png",
+      "texte": "Accusé = mail bien reçu.\nSuivi = mail bien ouvert.\nUtilisez sur mails importants.\nPas sur tous : c'est intrusif.",
+      "indicateur": "POUR INFORMATION",
+      "icone_ref": 5,
+      "mise_en_forme": {"couleur":"#7b0f99","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Réponses auto conditionnelles",
+      "image": "image_25.png",
+      "texte": "Au-delà de l'absence basique.\nRègles selon expéditeur ou objet.\nOrientez les demandes entrantes.\nGagnez en réactivité perçue.",
+      "indicateur": "ATELIER",
+      "icone_ref": 5,
+      "mise_en_forme": {"couleur":"#7b0f99","marge":36,"bonus":false,"layout":"12/51/32/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "Les archives PST",
+      "image": "image_26.png",
+      "texte": "Fichier d'archivage local Outlook.\nAllège le serveur de messagerie.\nLocal = non sauvegardé.\nPrivilégiez un réseau sécurisé.",
+      "indicateur": "ATELIER",
+      "icone_ref": 3,
+      "mise_en_forme": {"couleur":"#a9630d","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/47/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":20}
+    },
+    {
+      "titre": "TRAFIC MONDIAL",
+      "image": "08d41e5e-013f-443d-93be-95f792d23790.png",
+      "texte": "4,37 milliards d'utilisateurs.\n71,5% disposent de plusieurs emails.\n361,6 milliards de emails envoyés et reçus.\n241 millions de emails envoyés / minutes.\n82 emails reçus par utilisateur / jour en moy.\n8,3 milliards d'email envoyés en France.",
+      "indicateur": "Statista / Ecosend",
+      "icone_ref": 6,
+      "mise_en_forme": {"couleur":"#2896aa","marge":36,"bonus":false,"layout":"12/46/37/5","gaps":"0/63/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":57,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":22}
+    },
+    {
+      "titre": "SPAM ET INDÉSIRABLES",
+      "image": "image_29.png",
+      "texte": "44,99 % du traffic était du spam (2025)\n162 milliards d'emails spam envoyés / jour\n3.4 milliards d'emails de phishing envoyés / jour\n\n23% du contenu des emails est dupliqué d'une info déjà disponible.",
+      "indicateur": "Kaspersky 2025",
+      "icone_ref": 6,
+      "mise_en_forme": {"couleur":"#2896aa","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":54,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":22}
+    },
+    {
+      "titre": "PRODUCTIVITÉ et \nusage professionnel",
+      "image": "image_28.png",
+      "texte": "28% de la journée passée dans les emails\n11–36× par heure : l'employé moyen consulte\n84% gardent leur messagerie ouverte\n62% stressés au retour des congés\n67% consultent leurs mails en congés\n39% des salariés utilisent déjà l'IA\n+25% de concentration avec des règles mails",
+      "indicateur": "McKinsey / Mailbird",
+      "icone_ref": 6,
+      "mise_en_forme": {"couleur":"#2896aa","marge":36,"bonus":false,"layout":"12/41/42/5","gaps":"0/63/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":57,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":22}
+    },
+    {
+      "titre": "EMPREINTE CARBONE",
+      "image": "image_30.png",
+      "texte": "150 Mt de CO₂ générés par les emails\n0,3 g par email texte simple\nJusqu'à 50 g avec pièce jointe\n135 kg de CO₂ par salarié et par an\n108 000 tonnes de CO₂ chaque jour\n23 500 voitures équivalentes en CO₂ par jour",
+      "indicateur": "Carbon Literacy Project",
+      "icone_ref": 6,
+      "mise_en_forme": {"couleur":"#2896aa","marge":36,"bonus":false,"layout":"12/46/37/5","gaps":"0/63/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":54,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":22}
+    },
+    {
+      "titre": "SÉCURITÉ ET CYBERCRIMINALITÉ",
+      "image": "image_31.png",
+      "texte": "144 M de pièces jointes malveillantes\n90 % des attaques commencent par email\n254 jours pour identifier & contenir une violation\n1 M+ d’attaques phishing au T1-2025\n51,7 % usurpent Microsoft",
+      "indicateur": "IBM / Zensec",
+      "icone_ref": 6,
+      "mise_en_forme": {"couleur":"#2896aa","marge":36,"bonus":false,"layout":"12/50/33/5","gaps":"42/104/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":51,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":22}
+    },
+    {
+      "titre": "CLE USB + BITLOCKER",
+      "image": "7d3002ef-fc7f-4875-87c0-1698619c17bc.png",
+      "texte": "Données chiffrées par BitLocker\nProtection renforcée sous Windows\n\nConservez bien votre mot de passe\n/!\\ La DINSI ne pourra pas le récupérer /!\\",
+      "indicateur": "HORS SERIE",
+      "icone_ref": 4,
+      "mise_en_forme": {"couleur":"#a93226","marge":36,"bonus":true,"layout":"12/51/32/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":61,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":22}
+    },
+    {
+      "titre": "LES PST, Et si Outlook disparaissait ?",
+      "image": "image_32.png",
+      "texte": "Vos mails restent stockés\nMais plus forcément lisibles\nDépendre d'un seul logiciel\nC'est prendre un risque",
+      "indicateur": "HORS SERIE",
+      "icone_ref": 7,
+      "mise_en_forme": {"couleur":"#a93226","marge":36,"bonus":true,"layout":"12/52/31/5","gaps":"0/0/0","titre_taille":75,"titre_align":"flex-start","img_largeur":90,"img_align":"center","texte_taille":75,"texte_align":"center","ind_taille":69,"ind_align":"center","ligne_offset":54,"ind_offset":22}
+    }
+  ]
+}
